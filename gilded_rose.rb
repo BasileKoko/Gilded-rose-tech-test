@@ -19,6 +19,23 @@ class GildedRose
             item.quality = item.quality # you should not cap it, return what is given
           end
       end
+      
+      if item.name == "Backstage passes to a TAFKAL80ETC concert"
+        if item.sell_in <= 0
+          item.quality = 0
+        elsif item.sell_in < 6 && item.quality < 48
+          item.quality = item.quality + 3
+        elsif item.sell_in < 11 && item.quality < 49
+          item.quality = item.quality + 2
+        elsif item.sell_in > 10 && item.quality < 50
+          item.quality = item.quality + 1
+        else
+          item.quality = item.quality
+        end
+        item.sell_in = item.sell_in - 1
+
+      end
+
 
   #     if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
   #       if item.quality > 0
