@@ -16,6 +16,23 @@ describe GildedRose do
       end
     end
 
+    context "Aged Brie" do
+      before do
+        @items = [Item.new("Aged Brie", 10, 25)]
+        GildedRose.new(@items).update_quality()
+        @items1 = [Item.new("Aged Brie", 12, 55)]
+        GildedRose.new(@items1).update_quality()
+      end
+      it "quality should increase if quality is less than 50" do
+        expect(@items[0].quality).to eq 26
+      end
+      it "should not change quality if it is greater than 50" do
+        expect(@items1[0].quality).to eq 55
+      end
+      it "sell_in should decrease" do
+        expect(@items[0].sell_in).to eq 9
+      end
+    end
   end
 
 end
