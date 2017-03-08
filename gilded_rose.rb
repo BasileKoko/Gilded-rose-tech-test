@@ -3,9 +3,12 @@ class GildedRose
   def initialize(items)
     @items = items
   end
+  INVENTORY = ["Sulfuras", "Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Conjured"]
 
   def update_quality()
+
     @items.each do |item|
+
       if item.name == "Sulfuras"
         item.quality = 80
         item.sell_in = item.sell_in
@@ -45,8 +48,16 @@ class GildedRose
         end
       end
 
-
-
+       if !INVENTORY.include?(item.name)
+        if item.sell_in > 0 && item.quality > 1
+          item.quality = item.quality - 1
+        elsif item.sell_in < 0 && item.quality > 2
+          item.quality = item.quality - 2
+        else
+          item.quality = item.quality
+        end
+        item.sell_in = item.sell_in - 1
+       end
     end
   end
 end

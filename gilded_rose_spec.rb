@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'gilded_rose')
+require_relative 'gilded_rose'
 
 describe GildedRose do
   describe "#update_quality" do
@@ -91,6 +91,31 @@ describe GildedRose do
       end
       it "does not change quality if sell_in is greater or equal to 0 and quality is less than 2" do
         expect(@items3[0].quality).to eq 1
+      end
+    end
+
+    context "Any other items" do
+      before do
+        @items = [Item.new("Elixir of the Mongoose", 5, 4)]
+        GildedRose.new(@items).update_quality()
+        @items1 = [Item.new("Elixir of the Mongoose", -4, 3)]
+        GildedRose.new(@items1).update_quality()
+        @items2 = [Item.new("Elixir of the Mongoose", 0, 3)]
+        GildedRose.new(@items2).update_quality()
+        @items3 = [Item.new("Elixir of the Mongoose", 9, 3)]
+        GildedRose.new(@items3).update_quality()
+      end
+      it "decreases quality by 1 if sell_in is greater than 0 and quality is greater than 1" do
+        expect(@items[0].quality).to eq  3
+      end
+      it "decreases quality by 2 if sell_in is less than 0 and quality is greater than 2" do
+        expect(@items1[0].quality).to eq  1
+      end
+      it "does not change quality if sell_in is 0" do
+        expect(@items2[0].quality).to eq  3
+      end
+      it "decreases sell_in" do
+        expect(@items3[0].sell_in).to eq  8
       end
     end
 
