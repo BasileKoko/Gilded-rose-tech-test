@@ -1,13 +1,21 @@
 require File.join(File.dirname(__FILE__), 'gilded_rose')
 
 describe GildedRose do
-
   describe "#update_quality" do
-    it "does not change the name" do
-      items = [Item.new("foo", 0, 0)]
-      GildedRose.new(items).update_quality()
-      expect(items[0].name).to eq "fixme"
+
+    context "Sulfuras" do
+      before do
+        @items = [Item.new("Sulfuras", 5, 90)]
+        GildedRose.new(@items).update_quality()
+      end
+      it "quality value should remain 80" do
+        expect(@items[0].quality).to eq 80
+      end
+      it "sell_in should decrease" do
+        expect(@items[0].sell_in).to eq 4
+      end
     end
+
   end
 
 end
