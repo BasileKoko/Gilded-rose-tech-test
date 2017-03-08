@@ -8,7 +8,7 @@ class GildedRose
     @items.each do |item|
       if item.name == "Sulfuras"
         item.quality = 80
-        item.sell_in = item.sell_in - 1
+        item.sell_in = item.sell_in
       end
 
       if item.name == "Aged Brie"

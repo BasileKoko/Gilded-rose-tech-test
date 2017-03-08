@@ -11,8 +11,8 @@ describe GildedRose do
       it "quality value should remain 80" do
         expect(@items[0].quality).to eq 80
       end
-      it "sell_in should decrease" do
-        expect(@items[0].sell_in).to eq 4
+      it "sell_in should not change" do
+        expect(@items[0].sell_in).to eq 5
       end
     end
 
