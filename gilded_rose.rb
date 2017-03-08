@@ -16,7 +16,7 @@ class GildedRose
           if item.quality < 50
             item.quality = item.quality + 1
           elsif item.quality  > 50
-            item.quality = item.quality # you should not cap it, return what is given
+            item.quality = item.quality
           end
       end
 
@@ -32,11 +32,22 @@ class GildedRose
         else
           item.quality = item.quality
         end
-        item.sell_in = item.sell_in - 1
-
+          item.sell_in = item.sell_in - 1
       end
 
-     end
+      if item.name == "Conjured"
+        if item.sell_in < 0 && item.quality > 3
+          item.quality = item.quality - 4
+        elsif item.sell_in >= 0 && item.quality > 2
+          item.quality = item.quality - 2
+        else
+          item.quality = item.quality
+        end
+      end
+
+
+
+    end
   end
 end
 

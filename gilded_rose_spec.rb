@@ -67,5 +67,32 @@ describe GildedRose do
         expect(@items[0].sell_in).to eq 9
       end
     end
+
+    context "Conjured" do
+      before do
+        @items = [Item.new("Conjured", -2, 13)]
+        GildedRose.new(@items).update_quality()
+        @items1 = [Item.new("Conjured", -1, 2)]
+        GildedRose.new(@items1).update_quality()
+        @items2 = [Item.new("Conjured", 0, 6)]
+        GildedRose.new(@items2).update_quality()
+        @items3 = [Item.new("Conjured", 1, 1)]
+        GildedRose.new(@items3).update_quality()
+      end
+
+      it "decreases quality by 4 if sell_in is less than 0 and quality is greater than 3" do
+        expect(@items[0].quality).to eq 9
+      end
+      it "does not change quality if sell_in is less than 0 and quality is less than 4" do
+        expect(@items1[0].quality).to eq 2
+      end
+      it "decreases quality by 2 if sell_in is greater or equal to 0 and quality is greater than 2" do
+        expect(@items2[0].quality).to eq 4
+      end
+      it "does not change quality if sell_in is greater or equal to 0 and quality is less than 2" do
+        expect(@items3[0].quality).to eq 1
+      end
+    end
+
   end
 end
